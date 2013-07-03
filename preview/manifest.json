@@ -1,0 +1,24 @@
+{
+   "background_page": "background.html",
+   "content_scripts": [ {
+      "js": [ "sniff_common.js", "doc_start.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_start"
+   }, {
+      "js": [ "sniff_common.js", "feed_finder.js" ],
+      "matches": [ "http://*/*", "https://*/*" ]
+   } ],
+   "description": "Simple feed preview and subscribe.",
+   "icons": {
+      "128": "shoyu-icon-128x128.png"
+   },
+   "name": "Shoyu RSS/Atom Feed Preview",
+   "options_page": "options.html",
+   "page_action": {
+      "default_icon": "feed-icon-16x16.png",
+      "default_title": "Discover Feeds",
+      "popup": "popup.html"
+   },
+   "permissions": [ "tabs", "http://*/*", "https://*/*" ],
+   "version": "2.0.3.10"
+}

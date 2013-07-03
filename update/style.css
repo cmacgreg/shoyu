@@ -1,0 +1,85 @@
+/*
+ * Copyright (c) 2010 Breakfast Kings. All rights reserved.  Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file.
+ */
+
+body{
+	margin: 0;
+	overflow-x: hidden;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	font-size: small;
+	line-height: 1.5em;
+}
+
+.feedList{
+	display: none;
+}
+
+#content{
+	margin: 10px 25px 10px 10px;
+	min-width: 300px;
+	max-width: 760px;
+}
+
+#heading{
+	font-weight: bold;
+	height: 2.5em;
+}
+
+#updateButton{
+	float: right;
+}
+
+#leftHandResize{
+	left: 0;
+	top: 0;
+	width: 5px;
+	height: 100%;
+	position: fixed;
+	background-color: #D0D0D0;
+	cursor: e-resize;
+}
+
+#leftHandResize:hover{
+	background-color: #33C8E5;
+}
+
+:link, :visited{
+	font-weight: ;
+	text-decoration: none ;
+}
+.update, .updateNew, .noupdate{
+	color: black;
+}
+
+.divItem:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+/*.aItem:active {
+	color: #33C8E5;
+}*/
+
+.feedList div:nth-child(odd){
+	background-color: #F0F0F0;
+}
+
+.feedListDrag {
+	background-color:;
+}
+
+.update,.updateNew{
+	font-weight: bold;
+}
+
+.error{
+	color: red;
+}
+
+.tick{
+	color: #82D214;
+	font-weight: bold;
+	float: right;
+}

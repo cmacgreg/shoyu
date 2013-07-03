@@ -1,0 +1,76 @@
+<!--
+ * Copyright (c) 2010 Breakfast Kings. All rights reserved.  Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file.
+-->
+<html>
+<head>
+<style>
+  body {
+		background-color: #E6E6E6;
+		font-family: arial, sans-serif;
+		text-align: center;
+  }
+	h1 {
+		font-size: large;
+	}
+	h2 {
+		font-size: medium;
+	}
+	#content {
+		text-align: left;
+		background-color: white;
+		border: 3px solid black;
+		color: black;
+		display: inline-block;
+		margin: 25px;
+		padding: 25px;
+	}
+	
+	#content > *{
+		float: left;
+	}
+	
+	#about {
+		font-style: italic;
+		font-size: small;
+	}
+
+</style>
+<script>
+
+// Grab the querystring, removing question mark at the front and splitting on
+// the ampersand.
+var queryString = location.search.substring(1).split("&");
+
+// The feed URL is the first component and always present.
+var feedUrl = decodeURIComponent(queryString[0]);
+
+function main(){
+	document.getElementById("feedUrl").href=feedUrl;
+}
+
+</script>
+<title> Oops! No feed viewer was detected. </title>
+</head>
+<body onload="main()">
+	<div id='content'>
+		<img src="shoyu-icon-128x128-error.png">
+		<div>
+			<h1> Oops! No feed viewer was detected. </h1>
+			<h2> Suggestions: </h2>
+			<ul>
+				<li>Install <a href="https://chrome.google.com/extensions/detail/ilicaedjojicckapfpfdoakbehjpfkah">Shoyu Feed Preview</a></li>
+				<li>Install <a href="https://chrome.google.com/extensions/detail/nlbjncdgjeocebhnmkbbbdekmmmcbfjd">Google RSS Subscription Extension</a></li>
+				<li><a href="options.html">More options</a></li>
+				<hr>
+				<li><a id="feedUrl" href="#">Browse to the feed without a viewer</a></li>
+			</ul>
+			
+		</div>
+	</div>
+	<div id='about'>
+		Shoyu Feed Updates
+	</div>
+</body>
+</html>

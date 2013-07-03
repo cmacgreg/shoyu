@@ -1,0 +1,8 @@
+body {
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+}
+
+#rss-header > * {
+	float: left;
+}

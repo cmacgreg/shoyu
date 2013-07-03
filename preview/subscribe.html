@@ -1,0 +1,40 @@
+<!--
+ * Copyright (c) 2009 The Chromium Authors. All rights reserved.  Use of this
+ * source code is governed by a BSD-style license that can be found in the
+ * LICENSE file.
+-->
+<html>
+<head>
+  <title>Loading feed...</title>
+	<link rel="stylesheet" href="subscribe.css" type="text/css" />
+	<link id="style" rel="stylesheet" type="text/css" />
+	<link id="color" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript" src="iframe.js"></script>
+	<script type="text/javascript" src="subscribe.js"></script>
+</head>
+
+<body onload="main();">
+
+	<div id="rss-header">
+		<div>
+			<h1 id="rss-title"><a id="rss-link"></a>
+				<a id="feedUrl" class="feedUrl" title="Raw XML">.</a>
+			</h1>
+			<p id="rss-desc"></p>
+			<!--<img src="feed-icon-64x64.png" alt="feed-icon" align="absmiddle" />-->
+		</div>
+		<div id="readerSelect" style="display:none">
+			<div style="margin:5px 10px">
+				<span>
+					Subscribe with:
+				</span>
+				<span>
+				<select id="readerDropdown" onChange="onSelectChanged()"></select>
+				<button onclick="navigate();">Go</button><br />
+				</span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

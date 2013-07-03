@@ -1,0 +1,33 @@
+Synopsis:
+
+Shoyu 2.0.3.2 is a modified version of the RSS Subscription Extension (by Google) version 2.0.3/r37537.
+
+Features:
+
+* Modified preview behavior for raw feeds and empty feeds
+* Improved feed descriptions and display of content elements in Atom feeds.
+* Stylesheet compatible with the Sage RSS Extension for Mozilla Firefox.
+* Option to disable/hide online subscriptions.
+
+TODO:
+
+* Easy custom style sheet browser
+	* file:// paths won't work for style sheets in extensions, no way to add to the ext's resources, http:// path is inconvenient
+
+* Remove iframe stuff? or embrace it.
+
+* Other Sage options? Chronological/Exhaustive, 12/24 Hour clock, allow/disallow HTML
+
+BUGS:
+
+* Discovered feed popup visited link is for the feed itself, not subscribe?etc
+* Timestamp is a bit ugly.
+
+THANKS:
+
+* Google RSS Subscription Extension source at http://src.chromium.org/viewvc/chrome/trunk/src/chrome/test/data/extensions/subscribe_page_action/
+* Stylesheets derived from http://www.sagerss.com and http://hicksdesign.co.uk/journal/sage-on-os-x
+* Some code from http://dansnetwork.com/2008/11/01/javascript-iso8601rfc3339-date-parser
+
+Contact:
+* cmacgreg@gmail.com

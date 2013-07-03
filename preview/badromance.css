@@ -1,0 +1,19 @@
+h2.item-title a:hover, div.item-enclosure a:hover{
+	background-color: #DD0000;
+	color: #fff;
+}
+
+h2.item-title a {
+	display: block;
+	background-color: #F1EFC7; 
+	color: #000;
+}
+
+#rss-link,#rss-desc{
+	color: #fff;
+}
+
+#rss-header {
+	background:#000; /*#FC9E8D; */
+	border-top: 0px;
+}
