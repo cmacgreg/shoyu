@@ -14,8 +14,7 @@
 	<script type="text/javascript" src="subscribe.js"></script>
 </head>
 
-<body onload="main();">
-
+<body>
 	<div id="rss-header">
 		<div>
 			<h1 id="rss-title"><a id="rss-link"></a>
@@ -30,8 +29,8 @@
 					Subscribe with:
 				</span>
 				<span>
-				<select id="readerDropdown" onChange="onSelectChanged()"></select>
-				<button onclick="navigate();">Go</button><br />
+				<select id="readerDropdown"></select>
+				<button id="rss_subscription_subscribe_button">Go</button><br />
 				</span>
 			</div>
 		</div>

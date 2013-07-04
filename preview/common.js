@@ -7,20 +7,20 @@ var storageEnabled = window.localStorage != null;
 function defaultReaderList() {
   // This is the default list, unless replaced by what was saved previously.
   return [
-    { 'url': 'http://www.google.com/reader/view/feed/%s',
-      'description': 'Google Reader'
+    { 'url': 'http://www.theoldreader.com/feeds/subscribe?url=%s',
+      'description': 'The Old Reader'
     },
     { 'url': 'http://www.google.com/ig/adde?moduleurl=%s',
       'description': 'iGoogle'
     },
-    { 'url': 'http://www.bloglines.com/login?r=/sub/%s',
+    { 'url': 'http://www.bloglines.com/sub/%s',
       'description': 'Bloglines'
     },
     { 'url': 'http://add.my.yahoo.com/rss?url=%s',
       'description': 'My Yahoo'
     },
     { 'url': '%f',
-			'description': 'Default Application'
+      'description': 'Default Application'
     }
   ];
 }

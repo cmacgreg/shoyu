@@ -53,7 +53,7 @@ function main() {
 	
 		if (storageEnabled && window.localStorage.readerList)
 				feedReaderList = JSON.parse(window.localStorage.readerList);
-		if (!feedReaderList)
+		if (feedReaderList)
 			feedReaderList = defaultReaderList();
 
 		// Populate the list of readers.
@@ -100,7 +100,10 @@ function main() {
 
 	// Grab/insert style (TODO: remove/integrate iframe stuff)
 	
-	var colorStyle=window.localStorage?chrome.extension.getURL(window.localStorage.colorStyle):"";
+	var colorStyle 
+    = window.localStorage && window.localStorage.colorStyle 
+    ? chrome.extension.getURL(window.localStorage.colorStyle)
+    : "";
 	document.getElementById('style').href=chrome.extension.getURL("style.css");
 	document.getElementById('color').href=colorStyle;
   
@@ -214,3 +217,20 @@ function onSelectChanged() {
   if (readerDropdown.selectedIndex == readerDropdown.length - 1)
     window.location = "options.html";
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  /*document.title =
+      chrome.i18n.getMessage("rss_subscription_default_title");
+  i18nReplace('rss_subscription_subscribe_using');
+  i18nReplace('rss_subscription_subscribe_button');
+  i18nReplace('rss_subscription_always_use');
+  i18nReplace('rss_subscription_feed_preview');
+  i18nReplaceImpl('feedUrl', 'rss_subscription_feed_link', '');*/
+
+  var dropdown = document.getElementById('readerDropdown');
+  dropdown.addEventListener('change', onSelectChanged);
+  var button = document.getElementById('rss_subscription_subscribe_button');
+  button.addEventListener('click', navigate);
+
+  main();
+});

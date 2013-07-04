@@ -11,7 +11,7 @@ var logLevels = {
 
 // Defines the current log level. Values other than "none" are for debugging
 // only and should at no point be checked in.
-var currentLogLevel = logLevels.none;
+var currentLogLevel = logLevels.info;
 
 function containsFeed(doc) {
   debugMsg(logLevels.info, "containsFeed called");
