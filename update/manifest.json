@@ -1,9 +1,12 @@
 {
-   "background_page": "background.html",
+   "background": {
+    "scripts": ["background.js","us.js"]
+    //"persistent": false
+    },
    "browser_action": {
       "default_icon": "shoyu-icon-128x128.png",
       "default_title": "Feeds",
-      "popup": "popup.html"
+      "default_popup": "popup.html"
    },
    "description": "Simple feed updater.",
    "icons": {
@@ -11,6 +14,7 @@
    },
    "name": "Shoyu RSS/Atom Feed Updates",
    "options_page": "options.html",
-   "permissions": [ "http://*/*", "https://*/*", "bookmarks", "tabs" ],
-   "version": "1.0.4.2"
+   "permissions": [ "http://*/*", "https://*/*", "bookmarks", "tabs"],
+   "version": "1.0.4.3",
+   "manifest_version": 2
 }

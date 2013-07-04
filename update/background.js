@@ -1,12 +1,8 @@
-<!--
- * Copyright (c) 2010 Breakfast Kings. All rights reserved.  Use of this
+/*
+ * Copyright (c) 2013 Breakfast Kings. All rights reserved.  Use of this
  * source code is governed by a BSD-style license that can be found in the
  * LICENSE file.
--->
-<html>
-<head>
-<script type="text/javascript" src="us.js"></script>
-<script>
+ */
 
 var ICON_UNREAD = "shoyu-icon-128x128.png";
 var ICON_NO_UNREAD = "shoyu-icon-128x128-no-unread.png"
@@ -132,7 +128,3 @@ chrome.extension.onConnect.addListener(function(port){
 		}
 	});
 });
-
-</script>
-</head>
-</html>

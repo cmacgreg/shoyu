@@ -1,5 +1,5 @@
 <!--
- * Copyright (c) 2010 Breakfast Kings. All rights reserved.  Use of this
+ * Copyright (c) 2013 Breakfast Kings. All rights reserved.  Use of this
  * source code is governed by a BSD-style license that can be found in the
  * LICENSE file.
 -->
@@ -30,45 +30,15 @@
 	
 </style>
 <script type="text/javascript" src="viewselect.js"></script>
-<script>
-
-var va;
-
-function main(){
-	va=document['forms']['viewChoice']['defaultView'];
-	for(x=0; x<va.length; x++){
-		if(va[x].value == defaultView){
-			va[x].checked=true;
-			if(defaultView=="custom")
-				document.getElementById('customURL').value=extensionPath;
-			break;
-		}
-	}
-	if(window.localStorage.openInCurrentTab == "Yes")
-		document.getElementById('openInCurrentTab').checked=true;
-	if(window.localStorage.updateBookmarks == "Yes")
-		document.getElementById('updateBookmarks').checked=true;
-}
-
-function save(){
-	for(x=0; x<va.length; x++){
-		if(va[x].checked){
-			viewSelect(va[x].value,document.getElementById('customURL').value);
-			break;
-		}
-	}
-}
-
-</script>
-<title> Feed Update Options </title>
+<script type="text/javascript" src="options.js"></script><title> Feed Update Options </title>
 </head>
-<body onload="javascript:main()">
+<body>
 	<div id='header'>
 		<img id='icon' src="shoyu-icon-128x128.png">
 		Feed update options
 	</div>
 	<div id='options'>
-		<form id="viewChoice" name="viewChoice" onclick="save()"><i>Feed viewer selection:</i><br>
+		<form id="viewChoice" name="viewChoice"><i>Feed viewer selection:</i><br>
 			<input type="radio" name="defaultView" value="default" checked> Automatically detect a supported feed viewer<br>
 			<input type="radio" name="defaultView" value="browser"> Browser default feed action<br>
 			<input type="radio" name="defaultView" value="shoyu">
@@ -76,19 +46,17 @@ function save(){
 			<input type="radio" name="defaultView" value="google">
 				Always use<a href="https://chrome.google.com/extensions/detail/nlbjncdgjeocebhnmkbbbdekmmmcbfjd">Google RSS Subscription Extension</a><br>
 			<input type="radio" name="defaultView" value="custom">
-				Custom URL: <input id='customURL' type="text" size="80" onchange="save()" value="chrome-extension://hmfdfodlgacafapabhgjdkgbchjbkhnd/">
+				Custom URL: <input id='customURL' type="text" size="80" value="chrome-extension://hmfdfodlgacafapabhgjdkgbchjbkhnd/">
 		</form>
 		<div>
 			<i>Feed browsing behavior:</i><br>
-			<input type="checkbox" id='openInCurrentTab' value='No'
-				onchange="window.localStorage.openInCurrentTab=document.getElementById('openInCurrentTab').checked?'Yes':'No'">
+			<input type="checkbox" id='openInCurrentTab' value='No'>
 				Open feed in the current tab
 			<br>
 		</div>
 		<div>
 			<i>Bookmark options:</i><br>
-			<input type="checkbox" id='updateBookmarks' value='No'
-				onchange="window.localStorage.updateBookmarks=document.getElementById('updateBookmarks').checked?'Yes':'No'">
+			<input type="checkbox" id='updateBookmarks' value='No'>
 				Automatically clean up bookmark URLs
 			<br>
 		</div>
