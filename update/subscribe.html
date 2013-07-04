@@ -37,23 +37,10 @@
 	}
 
 </style>
-<script>
-
-// Grab the querystring, removing question mark at the front and splitting on
-// the ampersand.
-var queryString = location.search.substring(1).split("&");
-
-// The feed URL is the first component and always present.
-var feedUrl = decodeURIComponent(queryString[0]);
-
-function main(){
-	document.getElementById("feedUrl").href=feedUrl;
-}
-
-</script>
+<script type="text/javascript" src="subscribe.js"></script>
 <title> Oops! No feed viewer was detected. </title>
 </head>
-<body onload="main()">
+<body>
 	<div id='content'>
 		<img src="shoyu-icon-128x128-error.png">
 		<div>
