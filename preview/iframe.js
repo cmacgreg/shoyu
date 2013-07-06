@@ -1,12 +1,12 @@
 /* Copyright (c) 2009 The Chromium Authors. All rights reserved.
-   Use of this source code is governed by a BSD-style license that can be
-   found in the LICENSE file.
+	 Use of this source code is governed by a BSD-style license that can be
+	 found in the LICENSE file.
 */
 
 /* Use only multi-line comments in this file, since during testing
-   its contents will get read from disk and stuffed into the
-   iframe .src tag, which is a process that doesn't preserve line
-   breaks and makes single-line comment out the rest of the code.
+	 its contents will get read from disk and stuffed into the
+	 iframe .src tag, which is a process that doesn't preserve line
+	 breaks and makes single-line comment out the rest of the code.
 */
 
 /* The maximum number of feed items to show in the preview. */
@@ -27,14 +27,14 @@ function el(tag, text, parent) {
 }
 
 window.addEventListener("message", function(e) {
-  var parser = new DOMParser();
-  var doc = parser.parseFromString(e.data, "text/xml");
+	var parser = new DOMParser();
+	var doc = parser.parseFromString(e.data, "text/xml");
 
-  if (doc) {
-    buildPreview(doc);
-  } else {
-    /* Already handled in subscribe.html */
-  }
+	if (doc) {
+		buildPreview(doc);
+	} else {
+		/* Already handled in subscribe.html */
+	}
 }, false);
 
 function getLink(item){
@@ -103,29 +103,29 @@ function buildPreview(doc,feedUrl) {
 	var divItems = document.createElement("div");
 	divItems.className="items";
 
-  /* Now parse the rest. Some use <entry> for each feed item, others use
-     <channel><item>. */
-  var entries = doc.getElementsByTagName('entry');
-  if (entries.length == 0)
-    entries = doc.getElementsByTagName('item');
+	/* Now parse the rest. Some use <entry> for each feed item, others use
+		 <channel><item>. */
+	var entries = doc.getElementsByTagName('entry');
+	if (entries.length == 0)
+		entries = doc.getElementsByTagName('item');
 
-  for (i = 0; i < entries.length /*&& i < maxFeedItems*/; ++i) {
-    item = entries.item(i);
+	for (i = 0; i < entries.length /*&& i < maxFeedItems*/; ++i) {
+		item = entries.item(i);
 		
 		var itemDesc=getDescription(item,false);
 		var divDesc = document.createElement("div");
 		
-    divDesc.className = "item-desc";
-    divDesc.innerHTML = itemDesc;
+		divDesc.className = "item-desc";
+		divDesc.innerHTML = itemDesc;
 		divDesc.summarize=function(){return this.textContent.split(" ",8).join(" ") + "...";};
 
-    /* Grab the title for the feed item. */
-    var itemTitle = item.getElementsByTagName('title')[0];
-    if (itemTitle)
-      itemTitle = itemTitle.textContent;
+		/* Grab the title for the feed item. */
+		var itemTitle = item.getElementsByTagName('title')[0];
+		if (itemTitle)
+			itemTitle = itemTitle.textContent;
 		/* if the feed has no title, we use a few words from the description */
-    if (!itemTitle)
-      itemTitle = divDesc.summarize();
+		if (!itemTitle)
+			itemTitle = divDesc.summarize();
 		/* if the feed has no description, we take the title 
 		as html for the description, and summarize for the title */
 		if(!divDesc.innerHTML){
@@ -133,9 +133,9 @@ function buildPreview(doc,feedUrl) {
 			itemTitle = divDesc.summarize();
 		}
 
-    /* Ensure max length for title. */
-    /*if (itemTitle.length > maxTitleCount)
-      itemTitle = itemTitle.substring(0, maxTitleCount) + "...";*/
+		/* Ensure max length for title. */
+		/*if (itemTitle.length > maxTitleCount)
+			itemTitle = itemTitle.substring(0, maxTitleCount) + "...";*/
 
 		var date = new Date(0-i);		
 		var pubDate = item.getElementsByTagName('pubDate')[0];
@@ -167,13 +167,13 @@ function buildPreview(doc,feedUrl) {
 		var h2Title=document.createElement("h2");
 		h2Title.className = "item-title";
 
-    /* If we found a link we'll create an anchor element,
-    otherwise just use a bold headline for the title. */
-    var anchor = document.createElement("a");
-    /*anchor.id = "anchor_" + String(i);*/
-    if (link != "")
-      anchor.href = link;
-    //anchor.appendChild(document.createTextNode(itemTitle));
+		/* If we found a link we'll create an anchor element,
+		otherwise just use a bold headline for the title. */
+		var anchor = document.createElement("a");
+		/*anchor.id = "anchor_" + String(i);*/
+		if (link != "")
+			anchor.href = link;
+		//anchor.appendChild(document.createTextNode(itemTitle));
 		anchor.innerHTML=itemTitle;
 		anchor.innerHTML=anchor.innerText;  //magic de-html
 
@@ -231,7 +231,9 @@ function buildPreview(doc,feedUrl) {
 				}
 				var enclUrl=itemEncl[ie].getAttribute('url').split("/");
 				var len=parseInt(itemEncl[ie].getAttribute('length')/1024/10.24)/100;
-				var aEncl = el('a',decodeURIComponent(enclUrl[enclUrl.length-1]) + ", " +itemEncl[ie].getAttribute('type') + (len?" (" + len + " MB)":""),divEncl);
+				var aEncl = el('a',decodeURIComponent(enclUrl[enclUrl.length-1])
+					+ (itemEncl[ie].getAttribute('type') ? (", " + itemEncl[ie].getAttribute('type')) : "") 
+					+ (len?" (" + len + " MB)":""),divEncl);
 				aEncl.setAttribute('title',decodeURIComponent(enclUrl[enclUrl.length-1]));
 				aEncl.setAttribute('href',itemEncl[ie].getAttribute('url'));
 				var imgIcon=el('img','',aEncl);
@@ -257,13 +259,13 @@ function buildPreview(doc,feedUrl) {
 		divItem.className="item";
 		
 		divItem.appendChild(h2Title);
-    divItem.appendChild(divDesc);
+		divItem.appendChild(divDesc);
 		divItem.appendChild(divDate);
 		divItem.appendChild(divAuth);
 		divItem.date = date;
 	
-    itemList.push(divItem);
-  }
+		itemList.push(divItem);
+	}
 	
 	if(window.localStorage.sortFeeds=='Yes')
 		itemList.sort(function(a,b){return b.date - a.date;});

@@ -118,7 +118,7 @@ function gotTree(bookmarkTree){
 	var obf,sff; // 'other bookmarks' folder, shoyu feed folder
 	var feedList = el('div','',id('content'));
 	feedList.id=feedList.className="feedList";
-	id('content').style.width=listWidth;
+	id('content').style.width=listWidth+"px";
 	
 	/* obf is the parent of our feed folder
 			we need it in case our folder hasn't been created yet */
@@ -236,20 +236,32 @@ function resizeMouseDown(){
 	};
 }
 
+var dragDirection = 0;
+
 function drag(e){
-	document.onmousemove = function(){};
 	/* the chrome popup menu forces this odd left hand resize,
 		chrome seems to have its own max size for popups, but
 		our range is a bit smaller and defined in the stylesheet */
-	listWidth-=e.clientX;
-	id('content').style.width=listWidth+"px";
-	//id('heading').style.visibility='hidden';
-	id('feedList').className='feedListDrag';
 	
-	/* store the computed style size of content as the listWidth */
-	listWidth=document.defaultView.getComputedStyle(id('content'), "").getPropertyValue("width").split('px',1)[0];
-	window.localStorage.listWidth=listWidth;
-	document.onmousemove = drag;
+	/* avoid resize jumpiness by setting some thresholds
+		 and smoothing out the general direction of the drag */
+	var sign = e.clientX < -4 ? -1 : e.clientX > 4 ? 1 : 0;
+	dragDirection += sign;
+	var dDSign = dragDirection < 0 ? -1 : 1;
+	if(Math.abs(dragDirection) > 3){
+		dragDirection = sign * 3;
+	}
+	//id('heading').innerHTML=dragDirection;
+	if(dDSign == sign){
+		listWidth -= e.clientX;
+		id('heading').style.visibility='hidden';
+		id('content').style.width=listWidth+"px";
+		id('feedList').className='feedListDrag';
+		
+		/* store the computed style size of content as the listWidth */
+		listWidth=document.defaultView.getComputedStyle(id('content'), "").getPropertyValue("width").split('px',1)[0];
+		window.localStorage.listWidth=listWidth;
+	}
 	return false;
 }
 

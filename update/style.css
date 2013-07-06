@@ -41,7 +41,7 @@ body{
 	cursor: e-resize;
 }
 
-#leftHandResize:hover{
+#leftHandResize:active, #leftHandResize:hover{
 	background-color: #33C8E5;
 }
 

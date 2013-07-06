@@ -11,7 +11,11 @@ var STAT_UPDATE = "Updating...";
 var STAT_FEEDS = "Feeds:";
 var NO_CHANGES = " (no new updates)";
 var UNTITLED_FEED = "(untitled)";
-var TICK_TEXT = "•";//"&bull;";
+var TICK_HTML = "&bull;";
+
+var _ttdiv = document.createElement('div');
+_ttdiv.innerHTML = TICK_HTML;
+var TICK_TEXT = _ttdiv.firstChild.nodeValue;
 
 var folderName = ["Other bookmarks", "Shoyu feeds"];
 
