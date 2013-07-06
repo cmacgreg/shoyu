@@ -53,7 +53,7 @@ function main() {
 	
 		if (storageEnabled && window.localStorage.readerList)
 				feedReaderList = JSON.parse(window.localStorage.readerList);
-		if (feedReaderList)
+		if (!feedReaderList)
 			feedReaderList = defaultReaderList();
 
 		// Populate the list of readers.
