@@ -261,6 +261,7 @@ function drag(e){
 		/* store the computed style size of content as the listWidth */
 		listWidth=document.defaultView.getComputedStyle(id('content'), "").getPropertyValue("width").split('px',1)[0];
 		window.localStorage.listWidth=listWidth;
+		id('content').style.width=listWidth+"px";
 	}
 	return false;
 }

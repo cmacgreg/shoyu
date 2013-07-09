@@ -213,7 +213,8 @@ function validateInput() {
 
   var valid = description.value.length > 0 &&
                 url.value.length > 0 &&
-                url.value.indexOf("%s") > -1;
+                (url.value.indexOf("%s") > -1 ||
+                 url.value.indexOf("%f") > -1);
 
   document.getElementById('save').disabled = !valid;
 }

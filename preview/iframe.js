@@ -230,11 +230,12 @@ function buildPreview(doc,feedUrl) {
 					continue;
 				}
 				var enclUrl=itemEncl[ie].getAttribute('url').split("/");
+				enclUrl=enclUrl[enclUrl.length-1].replace(/\?.*$/,'');
 				var len=parseInt(itemEncl[ie].getAttribute('length')/1024/10.24)/100;
-				var aEncl = el('a',decodeURIComponent(enclUrl[enclUrl.length-1])
+				var aEncl = el('a',decodeURIComponent(enclUrl)
 					+ (itemEncl[ie].getAttribute('type') ? (", " + itemEncl[ie].getAttribute('type')) : "") 
 					+ (len?" (" + len + " MB)":""),divEncl);
-				aEncl.setAttribute('title',decodeURIComponent(enclUrl[enclUrl.length-1]));
+				aEncl.setAttribute('title',decodeURIComponent(enclUrl));
 				aEncl.setAttribute('href',itemEncl[ie].getAttribute('url'));
 				var imgIcon=el('img','',aEncl);
 				imgIcon.setAttribute('src',chrome.extension.getURL('enclosure.png'));
