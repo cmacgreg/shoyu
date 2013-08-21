@@ -37,8 +37,9 @@ var feedReaderList;
 // Navigates to the reader of the user's choice (for subscribing to the feed).
 function navigate() {
 	var select = document.getElementById('readerDropdown');
-	var url = feedReaderList[select.selectedIndex].url.replace("%s",encodeURIComponent(feedUrl));
-	url = url.replace( "%f", feedUrl.replace( "http:", "feed:" ) );
+	var url = feedReaderList[select.selectedIndex].url.replace(/%l/,feedUrl);
+			url = url.replace(/%s/,encodeURIComponent(feedUrl));
+			url = url.replace(/%f/, feedUrl.replace( /^https?:/, "feed:" ) );
 	document.location = url;
 }
 
@@ -107,7 +108,6 @@ function main() {
 	document.getElementById('style').href=chrome.extension.getURL("style.css");
 	document.getElementById('color').href=colorStyle;
   
-	feedUrl = decodeURIComponent(feedUrl);
 	req.onload = handleResponse;
 	req.onerror = handleError;
 	// Not everyone sets the mime type correctly, which causes handleResponse

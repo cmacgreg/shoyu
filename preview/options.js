@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 // Various text messages within the edit dialog.
-var assistText = "Use %s for the feed address within the reader URL";
+var assistText = "%s: Encoded URL; %l: Literal URL; %f: feed:// URL";
 
 // Specifies the index of the item we are editing or -1 if adding new.
 var editingIndex = -1;

@@ -69,7 +69,6 @@ function getDescription(item, head){
 			itemDesc = item.getElementsByTagNameNS("http://purl.org/rss/1.0/modules/content/",'encoded')[0];
 		if(!itemDesc){
 			itemDesc = item.getElementsByTagName('description').toArray();
-			itemDesc.sort(function(a,b){return a.length-b.length;});
 			itemDesc = itemDesc[0];
 		}
 		if(!itemDesc)
@@ -81,7 +80,7 @@ function getDescription(item, head){
 		itemDesc = item.getElementsByTagName('subtitle')[0];
 	}
 	if(!itemDesc)
-			itemDesc = item.getElementsByTagName('description')[0];
+		itemDesc = item.getElementsByTagName('description')[0];
 	if(itemDesc)
 		itemDesc = itemDesc.textContent;
 	else
@@ -137,7 +136,7 @@ function buildPreview(doc,feedUrl) {
 		/*if (itemTitle.length > maxTitleCount)
 			itemTitle = itemTitle.substring(0, maxTitleCount) + "...";*/
 
-		var date = new Date(0-i);		
+		var date = new Date(0-i);
 		var pubDate = item.getElementsByTagName('pubDate')[0];
 		if(!pubDate)
 			pubDate = item.getElementsByTagNameNS("http://purl.org/dc/elements/1.1/","date")[0];

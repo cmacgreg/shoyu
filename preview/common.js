@@ -7,21 +7,30 @@ var storageEnabled = window.localStorage != null;
 function defaultReaderList() {
   // This is the default list, unless replaced by what was saved previously.
   return [
-    { 'url': 'http://www.theoldreader.com/feeds/subscribe?url=%s',
-      'description': 'The Old Reader'
+    { 'url': 'http://www.feedly.com/home#subscription/feed/%s',
+      'description': 'Feedly',
     },
-    { 'url': 'http://www.google.com/ig/adde?moduleurl=%s',
-      'description': 'iGoogle'
+    { 'url': 'https://blogtrottr.com/?subscribe=%s',
+      'description': 'Blogtrottr',
     },
     { 'url': 'http://www.bloglines.com/sub/%s',
-      'description': 'Bloglines'
+      'description': 'Bloglines',
     },
     { 'url': 'http://add.my.yahoo.com/rss?url=%s',
-      'description': 'My Yahoo'
+      'description': 'My Yahoo',
+    },
+    { 'url': 'http://reader.aol.com/#quickadd/%l',
+      'description': 'AOL Reader',
+    },
+    { 'url': 'http://www.theoldreader.com/feeds/subscribe?url=%s',
+      'description': 'The Old Reader',
+    },
+    { 'url': 'http://www.google.com/ig/adde?moduleurl=%s',
+      'description': 'iGoogle',
     },
     { 'url': '%f',
-      'description': 'Default Application'
-    }
+      'description': 'Default Application',
+    },
   ];
 }
 
