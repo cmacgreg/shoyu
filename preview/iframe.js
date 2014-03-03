@@ -6,7 +6,7 @@
 /* Use only multi-line comments in this file, since during testing
 	 its contents will get read from disk and stuffed into the
 	 iframe .src tag, which is a process that doesn't preserve line
-	 breaks and makes single-line comment out the rest of the code.
+	 breaks and makes single-line comments comment out the rest of the code.
 */
 
 /* The maximum number of feed items to show in the preview. */
@@ -26,16 +26,40 @@ function el(tag, text, parent) {
 	return e;
 }
 
-window.addEventListener("message", function(e) {
-	var parser = new DOMParser();
-	var doc = parser.parseFromString(e.data, "text/xml");
-
-	if (doc) {
-		buildPreview(doc);
-	} else {
-		/* Already handled in subscribe.html */
-	}
-}, false);
+/* Find the token and target origin for this conversation from the HTML. The
+   token is used for secure communication, and is generated and stuffed into the
+   frame by subscribe.js.
+*/
+var token = '';
+var targetOrigin = '';
+var html = document.documentElement.outerHTML;
+var startTag = '<!--Token:';
+var tokenStart = html.indexOf(startTag);
+if (tokenStart > -1) {
+  tokenStart += startTag.length;
+  targetOrigin = html.substring(tokenStart, tokenStart+32);
+  tokenStart += 32;
+  var tokenEnd = html.indexOf('-->', tokenStart);
+  if (tokenEnd > tokenStart)
+    token = html.substring(tokenStart, tokenEnd);
+}
+ 
+if (token.length > 0) {
+  var mc = new MessageChannel();
+  window.parent.postMessage(
+      token,
+      'chrome-extension:/' + '/' + targetOrigin,
+      [mc.port2]);
+  mc.port1.onmessage = function(event) {
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(event.data, "text/xml");
+    if (doc) {
+      buildPreview(doc);
+    } else {
+      /* Already handled in subscribe.html */
+    }
+  }
+}
 
 function getLink(item){
 	/* Grab the link URL. */
@@ -63,13 +87,18 @@ function getLink(item){
 function getDescription(item, head){
 	/* Grab the description.
 		 TODO(aa): Do we need to check for type=html here? */
-	var itemDesc; 
+	var itemDesc;
+
+  console.log(item);console.log(head);
 
 	if(!head){
 			itemDesc = item.getElementsByTagNameNS("http://purl.org/rss/1.0/modules/content/",'encoded')[0];
 		if(!itemDesc){
-			itemDesc = item.getElementsByTagName('description').toArray();
-			itemDesc = itemDesc[0];
+			itemDesc = item.getElementsByTagName('description');
+      if(itemDesc){
+        console.log(itemDesc);
+			  itemDesc = itemDesc[0];
+      }
 		}
 		if(!itemDesc)
 			itemDesc = item.getElementsByTagName('content')[0];
@@ -172,9 +201,9 @@ function buildPreview(doc,feedUrl) {
 		/*anchor.id = "anchor_" + String(i);*/
 		if (link != "")
 			anchor.href = link;
-		//anchor.appendChild(document.createTextNode(itemTitle));
+		/*anchor.appendChild(document.createTextNode(itemTitle));*/
 		anchor.innerHTML=itemTitle;
-		anchor.innerHTML=anchor.innerText;  //magic de-html
+		anchor.innerHTML=anchor.innerText;  /*magic de-html*/
 
 		var spanOrdinal = document.createElement("span");
 		spanOrdinal.className = "item-ordinal";
@@ -183,7 +212,7 @@ function buildPreview(doc,feedUrl) {
 		h2Title.appendChild(spanOrdinal);
 		h2Title.appendChild(anchor);
 		
-		// relative url fixes
+		/* relative url fixes*/
 		var chromeExt = new RegExp(/^chrome-extension:\/\/[^\/]*\//);
 		
 		imgUrlFix=divDesc.getElementsByTagName("img");
@@ -199,14 +228,14 @@ function buildPreview(doc,feedUrl) {
 			var removetags=["object","embed","input","select","button","script","iframe","video","audio","style"];
 			
 			for(r in removetags){
-				var obj = divDesc.getElementsByTagName(removetags[r]).toArray();
+				var obj = divDesc.getElementsByTagName(removetags[r]);
 				for(x=0;x<obj.length;x++){
-					//obj[x].style.display="none";
+					/*obj[x].style.display="none";*/
 					obj[x].parentNode.removeChild(obj[x]);
 				}
 			}
 		}
-		var obj = divDesc.getElementsByTagName("*").toArray();
+		var obj = divDesc.getElementsByTagName("*");
 		for(x=0;x<obj.length;x++){
 			obj[x].style.textAlign="left";
 			obj[x].style.float="none";
@@ -222,7 +251,7 @@ function buildPreview(doc,feedUrl) {
 			divEncl.className="item-enclosure";
 			for(ie=0;ie<itemEncl.length;ie++){
 				if(itemEncl[ie].getAttribute('type').match(imgMime)){
-					//convert enclosed images to plain img src tags
+					/*convert enclosed images to plain img src tags*/
 					var enc2Img=document.createElement('img');
 					enc2Img.src=itemEncl[ie].getAttribute('url');
 					divDesc.appendChild(enc2Img);

@@ -76,6 +76,12 @@ function main() {
 		setTimeout("window.close();",500); //lol
 		return;
 	}
+
+  // Set the token.
+  var tokenArray  = new Uint32Array(4);
+  crypto.getRandomValues(tokenArray);
+  token = [].join.call(tokenArray);
+
 	// Now fetch the data.
 	req = new XMLHttpRequest();
 	if (synchronousRequest) {
@@ -90,8 +96,13 @@ function main() {
 		req.open("GET", "iframe.js", false);
 		req.send(null);
 
-		frameScript = "<script>" + req.responseText +
-						"<" + "/script>";
+    //if (req.responseText.indexOf('//') != -1) {
+    //  console.log('Error: Single-line comment(s) found in iframe.js');
+    //} else {
+      frameScript = "<script>" +
+                    req.responseText +
+                     "<" + "/script>";
+    //}
 	} else {
 	// Normal loading just requires links to the css and the js file.
 	styleSheet = "<link rel='stylesheet' type='text/css' href='" +
@@ -156,10 +167,19 @@ function handleFeedParsingFailed(error) {
 }
 
 function createFrame(frame_id, html) {
+  // During testing, we stuff the iframe with the script directly, so we relax
+  // the policy on running scripts under that scenario.
+  var csp = synchronousRequest ?
+      '<meta http-equiv="content-security-policy" ' +
+          'content="object-src \'none\'">' :
+      '<meta http-equiv="content-security-policy" ' +
+          'content="object-src \'none\'; script-src \'self\'">';
   frame = document.createElement('iframe');
   frame.id = frame_id;
-  frame.src = "data:text/html;charset=utf-8,<html>" + styleSheet + html +
-                "</html>";
+  frame.src = "data:text/html;charset=utf-8,<html>" + csp + styleSheet +
+              "<!--Token:" + extension_id + token +
+              "-->" + html + "</html>";
+
   frame.scrolling = "auto";
   frame.frameBorder = "0";
   frame.marginWidth = "0";
@@ -188,6 +208,7 @@ function handleResponse() {
     handleFeedParsingFailed("This feed contains no entries.")
     //return;
   }
+
 
   // Figure out what the title of the whole feed is.
   var title = doc.getElementsByTagName('title')[0];
@@ -234,3 +255,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   main();
 });
+
+window.addEventListener("message", function(e) {
+  if (e.ports[0] && e.data === token)
+    e.ports[0].postMessage(req.responseText);
+}, false);
