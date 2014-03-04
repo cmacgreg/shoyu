@@ -89,15 +89,12 @@ function getDescription(item, head){
 		 TODO(aa): Do we need to check for type=html here? */
 	var itemDesc;
 
-  console.log(item);console.log(head);
-
 	if(!head){
 			itemDesc = item.getElementsByTagNameNS("http://purl.org/rss/1.0/modules/content/",'encoded')[0];
 		if(!itemDesc){
 			itemDesc = item.getElementsByTagName('description');
       if(itemDesc){
-        console.log(itemDesc);
-			  itemDesc = itemDesc[0];
+		itemDesc = itemDesc[0];
       }
 		}
 		if(!itemDesc)
