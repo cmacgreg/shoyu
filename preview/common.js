@@ -7,20 +7,14 @@ var storageEnabled = window.localStorage != null;
 function defaultReaderList() {
   // This is the default list, unless replaced by what was saved previously.
   return [
-    { 'url': 'http://www.feedly.com/home#subscription/feed/%s',
+    { 'url': 'https://feedly.com/i/discover/sources/search/feed/%s',
       'description': 'Feedly',
     },
     { 'url': 'https://blogtrottr.com/?subscribe=%s',
       'description': 'Blogtrottr',
     },
-    { 'url': 'http://www.bloglines.com/sub/%s',
-      'description': 'Bloglines',
-    },
     { 'url': 'http://add.my.yahoo.com/rss?url=%s',
       'description': 'My Yahoo',
-    },
-    { 'url': 'http://reader.aol.com/#quickadd/%l',
-      'description': 'AOL Reader',
     },
     { 'url': 'http://www.theoldreader.com/feeds/subscribe?url=%s',
       'description': 'The Old Reader',
